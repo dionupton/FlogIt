@@ -29,6 +29,10 @@ internal static class HostingExtensions
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
 
+                if(builder.Environment.IsEnvironment("Docker")){
+                    options.IssuerUri = "identity-svc";
+                }
+
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 // options.EmitStaticAudienceClaim = true;
             })
@@ -58,7 +62,6 @@ internal static class HostingExtensions
     
     public static WebApplication ConfigurePipeline(this WebApplication app)
     { 
-        app.UseCookiePolicy();
         app.UseSerilogRequestLogging();
     
         if (app.Environment.IsDevelopment())
@@ -69,8 +72,6 @@ internal static class HostingExtensions
         app.UseStaticFiles();
         app.UseRouting();
         app.UseIdentityServer();
-        app.UseAuthorization();
-        app.UseAuthentication();
         
         app.MapRazorPages()
             .RequireAuthorization();
