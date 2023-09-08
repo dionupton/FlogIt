@@ -8,6 +8,7 @@ using Polly.Extensions.Http;
 using SearchService.Consumers;
 using SearchService.Models;
 using SearchService.Services;
+using SearchService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumersFromNamespaceContaining<AuctionCreatedConsumer>();
     x.AddConsumersFromNamespaceContaining<AuctionDeletedConsumer>();
     x.AddConsumersFromNamespaceContaining<AuctionUpdatedConsumer>();
+    x.AddConsumersFromNamespaceContaining<BidPlacedConsumer>();
     
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("search", false));
     
