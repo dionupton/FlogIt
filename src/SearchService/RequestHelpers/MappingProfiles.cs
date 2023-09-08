@@ -10,6 +10,7 @@ public class MappingProfiles : Profile
     {
         CreateMap<AuctionCreated, Item>();
         CreateMap<AuctionUpdated, Item>();
+        CreateMap<AuctionDeleted, Item>();
     }
     
 }
