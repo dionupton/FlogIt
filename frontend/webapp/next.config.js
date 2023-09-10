@@ -8,7 +8,7 @@ const nextConfig = {
             'cdn.pixabay.com',
             'people.com'
         ]
-    }
+    }, output: 'standalone'
 }
 
 module.exports = nextConfig
