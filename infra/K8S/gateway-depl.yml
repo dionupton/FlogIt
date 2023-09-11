@@ -18,6 +18,8 @@ spec:
         env:
         - name: ClientApp
           value: https://app.flogit.com
+        - name: IdentityServiceUrl
+          value: https://id.flogitdemoapp.co.uk
 
 ---
 
