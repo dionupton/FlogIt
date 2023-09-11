@@ -29,6 +29,14 @@ public static class Config
                 AllowedGrantTypes = {GrantType.ResourceOwnerPassword}
             },
             new Client{
+                ClientId = "pybot",
+                ClientName = "PyBot",
+                AllowedScopes = {"openid", "profile", "auctionApp"},
+                RedirectUris = {""},
+                ClientSecrets = new[] {new Secret("NotASecret".Sha256())},
+                AllowedGrantTypes = {GrantType.ResourceOwnerPassword}
+            },
+            new Client{
                 ClientId = "nextapp",
                 ClientName = "nextapp",
                 ClientSecrets = {new Secret("secret".Sha256())},

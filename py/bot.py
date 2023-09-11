@@ -6,19 +6,40 @@ from datetime import datetime, timedelta
 import random
 import pandas as pd
 import schedule
+import pytz
 
 GATEWAY_API_URL = os.getenv('GATEWAY_API_URL') or 'http://localhost:6001'
 IDENTITY_URL = os.getenv('IDENTITY_URL') or 'http://localhost:5000'
 
 auctions_data = None  # Initial declaration of fetched auctions
 
-def get_access_token():
+# Initial setup for token request
+token_url = IDENTITY_URL + "/connect/token"
+headers = {
+    "Content-Type": "application/x-www-form-urlencoded"
+}
+
+# Separate function to get access token for a specific user
+def get_access_token_for(username):
+    token_data = {
+        "grant_type": "password",
+        "username": username,
+        "password": "Pass123$",
+        "client_id": "pybot",
+        "client_secret": "NotASecret",
+        "scope": "auctionApp openid profile"
+    }
+
     while True:
         response = requests.post(token_url, headers=headers, data=token_data)
         if response.status_code == 200:
             return response.json().get("access_token")
-        print("Failed to retrieve the token. Retrying in 1 minute...")
+        print(f"Failed to retrieve the token for {username}. Retrying in 1 minute...")
         time.sleep(60)
+        
+# Getting both tokens initially
+bob_token = get_access_token_for("bob")
+alice_token = get_access_token_for("alice")
 
 # Function to generate a random auction end datetime
 def random_auction_end():
@@ -56,28 +77,6 @@ for key, link in link_dict.items():
     make, model, colour = extract_info_from_key(key)
     print(f"Make: {make}, Model: {model}, Colour: {colour}")
 
-# Initial setup for token request
-token_url = IDENTITY_URL + "/connect/token"
-headers = {
-    "Content-Type": "application/x-www-form-urlencoded"
-}
-token_data = {
-    "grant_type": "password",
-    "username": "bob",
-    "password": "Pass123$",
-    "client_id": "postman",
-    "client_secret": "NotASecret",
-    "scope": "auctionApp openid profile"
-}
-
-token = get_access_token()
-
-# Setup for auction request
-auction_url = GATEWAY_API_URL + "/auctions"
-headers = {
-    "Authorization": f"Bearer {token}",
-    "Content-Type": "application/json"
-}
 
 def fetch_auctions_and_store():
     global auctions_data  # Reference the global variable
@@ -90,10 +89,16 @@ fetch_auctions_and_store()
 print(auctions_data.head())
 
 def create_auction():
+    auction_url = GATEWAY_API_URL + "/auctions"
     dateString = random_auction_end()
     chosen_key, chosen_link = random.choice(list(link_dict.items()))
     make, model, colour = extract_info_from_key(chosen_key)
     make, model, colour = make.lower().capitalize(), model.lower().capitalize(), colour.lower().capitalize()
+    
+    headers_for_create = {
+        "Authorization": f"Bearer {bob_token}",
+        "Content-Type": "application/json"
+    }
 
     # Raw JSON body for the auction request with random values
     body = {
@@ -107,11 +112,11 @@ def create_auction():
         "auctionEnd": dateString
         }
 
-    response = requests.post(auction_url, headers=headers, data=json.dumps(body))
+    response = requests.post(auction_url, headers=headers_for_create, data=json.dumps(body))
 
-    if response.status_code == 403:  # Forbidden, meaning the token might have expired or is not valid
+    if response.status_code == 403 | 401:  # Forbidden, meaning the token might have expired or is not valid
         print("Access denied. Re-obtaining token...")
-        token = get_access_token()
+        token = get_access_token_for('bob')
         headers["Authorization"] = f"Bearer {token}"
 
     print(response.status_code)
@@ -126,8 +131,14 @@ def place_bid():
         print("No auctions data available yet.")
         return
     
+    # Convert current UTC time to a timezone-aware datetime object
+    current_utc_time = datetime.utcnow().replace(tzinfo=pytz.utc)
+
+    # Convert 'auctionEnd' column to datetime format
+    auction_end_dates = pd.to_datetime(auctions_data['auctionEnd'], format='ISO8601')
+    
     # Filter the auctions based on the provided conditions
-    valid_auctions = auctions_data[(auctions_data['seller'] != 'bob') & (auctions_data['status'] == 'Live')]
+    valid_auctions = auctions_data[(auctions_data['seller'] != 'alice') & (auction_end_dates > current_utc_time)]
     
     # If no valid auctions, print a message and return
     if valid_auctions.empty:
@@ -141,15 +152,21 @@ def place_bid():
     current_high_bid = auction['currentHighBid']
     bid_amount = current_high_bid + random.randint(1, 10)
     
+    headers_for_bid = {
+        "Authorization": f"Bearer {alice_token}",
+        "Content-Type": "application/json"
+    }
+    
     # Construct the URL and make the POST request
     url = f"{GATEWAY_API_URL}/bids?auctionId={auction['id']}&amount={bid_amount}"
-    response = requests.post(url, headers=headers)
+    response = requests.post(url, headers=headers_for_bid)
     
     # Print the response
     if response.status_code == 200:
         print(f"Successfully placed a bid of £{bid_amount} for auction {auction['id']}")
     else:
         print(f"Failed to place bid. Status code: {response.status_code}. Response: {response.text}")
+        if(response.status_code == 401 | 403) : get_access_token_for('alice')
 
     
 # schedule the functions

@@ -168,7 +168,7 @@ services:
       - id.flogit.com:10.5.0.200
     environment:
       - NEXTAUTH_SECRET=somethingreallysecret
-      - NEXTAUTH_URL=http://app.flogit.com
+      - NEXTAUTH_URL=https://app.flogit.com
       - NEXTAUTH_URL_INTERNAL=http://webapp:3000
       - API_URL=http://gateway-svc/
       - ID_URL=http://id.flogit.com

@@ -18,7 +18,8 @@ type Props = {
 };
 export default function BidList({ user, auction }: Props) {
   const [loading, setLoading] = useState(true);
-  const bids = useBidStore((state) => state.bids);
+  const allBids = useBidStore((state) => state.bids);
+  const bids = allBids.filter(bid => bid.auctionId === auction.id)
   const setBids = useBidStore((state) => state.setBids);
   const open = useBidStore((state) => state.open);
   const setOpen = useBidStore((state) => state.setOpen);
