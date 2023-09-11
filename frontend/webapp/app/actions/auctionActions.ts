@@ -7,7 +7,6 @@ import { revalidatePath } from "next/cache";
 
 export async function getData(query: string) : Promise<PagedResult<Auction>>{
     const x = await fetchWrapper.get(`search${query}`)
-    console.log(x)
     return x;
 }
 

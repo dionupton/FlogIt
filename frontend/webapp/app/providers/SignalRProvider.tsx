@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import AuctionCreatedToast from "../components/AuctionCreatedToast";
 import { getDetailedViewData } from "../actions/auctionActions";
 import AuctionFinishedToast from "../components/AuctionFinishedToast";
+import BidPlacedToast from "../components/BidPlacedToast";
 
 type Props = {
   children: ReactNode;
@@ -41,13 +42,31 @@ export default function SignalRProvider({ children, user }: Props) {
         .then(() => {
           console.log("Connected to notification hub");
 
-          connection.on("BidPlaced", (bid: Bid) => {
+          connection.on("BidPlaced", 
+          (bid: Bid) => {
+
             console.log("Bid placed event received");
             console.log(bid);
             if (bid.bidStatus.includes("Accepted")) {
               setCurrentPrice(bid.auctionId, bid.amount);
             }
             addBid(bid);
+
+            const auction = getDetailedViewData(bid.auctionId);
+            return toast.promise(
+              auction,
+              {
+                loading: "Loading...",
+                success: (auction) => (
+                  <BidPlacedToast
+                    bid={bid}
+                    auction={auction}
+                  />
+                ),
+                error: (err) => "Bid placed !",
+              },
+              { success: { duration: 6000, icon: null } }
+            );
           });
 
           connection.on("AuctionCreated", (auction: Auction) => {

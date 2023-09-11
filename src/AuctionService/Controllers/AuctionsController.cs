@@ -56,6 +56,8 @@ public class AuctionsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<AuctionDto>> CreateAuction(CreateAuctionDto auctionDto)
     {
+            // Explicitly specify the AuctionEnd to be UTC
+        auctionDto.AuctionEnd = DateTime.SpecifyKind(auctionDto.AuctionEnd, DateTimeKind.Utc);
         var auction = _mapper.Map<Auction>(auctionDto);
         
         auction.Seller = User.Identity.Name;

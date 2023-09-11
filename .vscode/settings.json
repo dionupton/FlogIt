@@ -1,3 +1,7 @@
 {
-    "dotnet.defaultSolution": "FlogIt.sln"
+    "dotnet.defaultSolution": "FlogIt.sln",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "python.formatting.provider": "none"
 }

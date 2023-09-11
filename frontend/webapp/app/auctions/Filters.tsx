@@ -5,18 +5,18 @@ import {AiOutlineClockCircle, AiOutlineSortAscending} from 'react-icons/ai'
 import {BsFillStopCircleFill, BsStopwatchFill} from 'react-icons/bs'
 import { GiFinishLine, GiFlame } from 'react-icons/gi'
 
-const pageSizeButtons = [4, 8, 12]
+const pageSizeButtons = [15, 30, 45]
 
 const orderButtons = [
-    {
-        label: 'Alphabetical',
-        icon: AiOutlineSortAscending,
-        value: 'make'
-    },
     {
         label: 'Ending Date',
         icon: AiOutlineClockCircle,
         value: 'endingSoon'
+    },
+    {
+        label: 'Alphabetical',
+        icon: AiOutlineSortAscending,
+        value: 'make'
     },
     {
         label: 'Recently Added',

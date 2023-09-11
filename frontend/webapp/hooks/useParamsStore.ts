@@ -20,11 +20,11 @@ type Actions = {
 
 const initialState: State = {
     pageNumber: 1,
-    pageSize: 12,
+    pageSize: 15,
     pageCount: 1,
     searchTerm: '',
     searchValue: '',
-    orderBy: 'make',
+    orderBy: 'endingSoon',
     filterBy: 'live',
     seller: undefined,
     winner: undefined

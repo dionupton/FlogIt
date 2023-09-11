@@ -30,6 +30,7 @@ export default function UserActions({user} : Props) {
 
   return (
     <Dropdown
+    className=''
     inline
     label={`Welcome ${user.name}`}
   >

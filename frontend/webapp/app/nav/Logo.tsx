@@ -3,7 +3,6 @@
 import { useParamStore } from "@/hooks/useParamsStore";
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { GiTakeMyMoney } from "react-icons/gi";
 
 export default function Logo() {
   const router = useRouter()
@@ -18,10 +17,10 @@ export default function Logo() {
   return (
     <div
       onClick={doReset}
-      className="cursor-pointer flex items-center gap-2 text-3xl font-semibold text-red-500"
+      className="cursor-pointer flex items-center gap-2 text-3xl font-bold"
     >
-      <GiTakeMyMoney size={34} />
-      <div>Flog It Auctions</div>
+      
+      <div>FLOG IT</div>
     </div>
   );
 }

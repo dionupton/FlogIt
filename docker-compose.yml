@@ -91,6 +91,8 @@ services:
     networks:
       custom:
          ipv4_address: 10.5.0.200
+    ports:
+      - 5000:80
   gateway-svc:
     image: dionupton/gateway-svc:latest
     build:
@@ -101,6 +103,8 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ClientApp=https://app.flogit.com
       - VIRTUAL_HOST=api.flogit.com
+    ports:
+      - 6001:80
     networks:
       custom:
   bid-svc:
@@ -121,7 +125,23 @@ services:
       - mongodb
       - rabbitmq 
     networks:
-      custom:   
+      custom: 
+  py-svc:
+    image: dionupton/py-svc:latest
+    volumes:
+      - ./data:/data
+    networks:
+      custom:
+    environment:
+      - GATEWAY_API_URL=http://gateway-svc
+      - IDENTITY_URL=http://identity-svc
+    build:
+      context: .
+      dockerfile: py/dockerfile  
+    depends_on:
+      - gateway-svc
+      - identity-svc
+    command: python3 py/bot.py
   notify-svc:
     image: dionupton/notify-svc:latest
     build:
@@ -156,7 +176,7 @@ services:
       - VIRTUAL_HOST=app.flogit.com
       - VIRTUAL_PORT=3000
     networks:
-      custom: 
+      custom:
   nginx-proxy:
     image: nginxproxy/nginx-proxy
     ports:
