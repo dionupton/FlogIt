@@ -4,8 +4,15 @@ metadata:
   name: ingress-svc
   labels:
     name: ingress-svc
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.flogitdemoapp.co.uk
+    - api.flogitdemoapp.co.uk
+    secretName: flogit-tls
   rules:
   - host: app.flogitdemoapp.co.uk
     http:

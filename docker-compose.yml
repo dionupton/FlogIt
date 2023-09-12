@@ -133,8 +133,8 @@ services:
     networks:
       custom:
     environment:
-      - GATEWAY_API_URL=http://gateway-svc
-      - IDENTITY_URL=http://identity-svc
+      - GATEWAY_API_URL=https://api.flogitdemoapp.co.uk
+      - IDENTITY_URL=https://id.flogitdemoapp.co.uk
     build:
       context: .
       dockerfile: py/dockerfile  

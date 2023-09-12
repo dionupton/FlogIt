@@ -7,9 +7,28 @@ import random
 import pandas as pd
 import schedule
 import pytz
+from flask import Flask, jsonify
+from threading import Thread
+
+
+app = Flask("pythonBot")
+
+logs = []
+
+@app.route('/logs', methods=['GET'])
+def get_logs():
+    return jsonify(logs)
+
+def add_log(message):
+    if len(logs) >= 5:
+        logs.pop(0)  # Remove the oldest log
+    logs.append(message)
 
 GATEWAY_API_URL = os.getenv('GATEWAY_API_URL') or 'http://localhost:6001'
 IDENTITY_URL = os.getenv('IDENTITY_URL') or 'http://localhost:5000'
+
+GATEWAY_API_URL = 'https://api.flogitdemoapp.co.uk'
+IDENTITY_URL = 'https://id.flogitdemoapp.co.uk'
 
 auctions_data = None  # Initial declaration of fetched auctions
 
@@ -21,6 +40,7 @@ headers = {
 
 # Separate function to get access token for a specific user
 def get_access_token_for(username):
+    print('get access token')
     token_data = {
         "grant_type": "password",
         "username": username,
@@ -113,6 +133,10 @@ def create_auction():
         }
 
     response = requests.post(auction_url, headers=headers_for_create, data=json.dumps(body))
+    
+    if response.status_code == 200:
+        print('successfuly created new auction')
+        add_log(f"Successfully created auction with ID: {response.json()['id']}")
 
     if response.status_code == 403 | 401:  # Forbidden, meaning the token might have expired or is not valid
         print("Access denied. Re-obtaining token...")
@@ -164,9 +188,11 @@ def place_bid():
     # Print the response
     if response.status_code == 200:
         print(f"Successfully placed a bid of £{bid_amount} for auction {auction['id']}")
+        add_log(f"Successfully placed a bid of £{bid_amount} for auction {auction['id']}")
+
     else:
         print(f"Failed to place bid. Status code: {response.status_code}. Response: {response.text}")
-        if(response.status_code == 401 | 403) : get_access_token_for('alice')
+        if(response.status_code == 401 ) : get_access_token_for('alice')
 
     
 # schedule the functions
@@ -177,6 +203,16 @@ schedule.every(600).seconds.do(create_auction)
 
 schedule.every(3).minutes.do(fetch_auctions_and_store)
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+def run_schedule():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+        
+if __name__ == "__main__":
+    t = Thread(target=run_schedule)
+    t.start()
+    
+    app.run(port=5000)
+
+    
+
