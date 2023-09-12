@@ -11,6 +11,22 @@ Welcome to **FlogIt**, my illustrative auction platform project. Crafted with pr
 
 ## 🛠️ Technical Stack & Architecture
 
+Explore the technologies and services that power this portfolio:
+
+![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET-512BD4?style=flat&logo=dot-net&logoColor=white)
+![NextJS](https://img.shields.io/badge/next%20js-000000?style=flat&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/react-61DAFB?style=flat&logo=react&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)
+![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?style=flat&logo=rabbitmq&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat&logo=kubernetes&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat&logo=github-actions&logoColor=white)
+
+
 - **Frontend**: Utilized Next.js, capitalizing on its capabilities to create a dynamic and responsive user interface.
 - **Backend**: Developed on the ASP.NET Core microservices framework. Duende IdentityServer is integrated for authentication, SignalR for real-time interactions, and RabbitMQ for asynchronous messaging.
 - **Databases**: Chose PostgreSQL for its robustness in handling relational data and MongoDB for its flexibility with NoSQL storage.
