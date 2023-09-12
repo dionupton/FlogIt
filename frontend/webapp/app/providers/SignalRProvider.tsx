@@ -23,7 +23,7 @@ export default function SignalRProvider({ children, user }: Props) {
   const addBid = useBidStore((state) => state.addBid);
   const apiUrl =
     process.env.NODE_ENV === "production"
-      ? "https://api.flogit.com/notifications"
+      ? "https://api.flogitdemoapp.co.uk/notifications"
       : process.env.NEXT_PUBLIC_NOTIFY_URL;
       
   useEffect(() => {

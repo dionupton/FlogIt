@@ -17,7 +17,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: ClientApp
-          value: https://app.flogit.com
+          value: https://app.flogitdemoapp.co.uk
         - name: IdentityServiceUrl
           value: https://id.flogitdemoapp.co.uk
 
