@@ -25,7 +25,7 @@ export default function SignalRProvider({ children, user }: Props) {
     process.env.NODE_ENV === "production"
       ? "https://api.flogitdemoapp.co.uk/notifications"
       : process.env.NEXT_PUBLIC_NOTIFY_URL;
-      
+
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
       .withUrl(apiUrl!)
@@ -42,9 +42,7 @@ export default function SignalRProvider({ children, user }: Props) {
         .then(() => {
           console.log("Connected to notification hub");
 
-          connection.on("BidPlaced", 
-          (bid: Bid) => {
-
+          connection.on("BidPlaced", (bid: Bid) => {
             console.log("Bid placed event received");
             console.log(bid);
             if (bid.bidStatus.includes("Accepted")) {
@@ -58,10 +56,7 @@ export default function SignalRProvider({ children, user }: Props) {
               {
                 loading: "Loading...",
                 success: (auction) => (
-                  <BidPlacedToast
-                    bid={bid}
-                    auction={auction}
-                  />
+                  <BidPlacedToast bid={bid} auction={auction} />
                 ),
                 error: (err) => "Bid placed !",
               },
