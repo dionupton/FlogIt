@@ -100,7 +100,7 @@ export default function AuctionForm({ auction }: Props) {
       {pathname === '/auctions/create' &&
       <>
         <Input
-          label="Image URL"
+          label="Image URL (accepted domains : cdn.pixabay.com, people.com, res.cloudinary.com)"
           name="imageUrl"
           control={control}
           rules={{ required: "Image URL is required" }}

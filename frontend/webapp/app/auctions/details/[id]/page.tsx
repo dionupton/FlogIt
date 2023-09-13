@@ -11,7 +11,6 @@ import DetailedSpecs from "./DetailedSpecs";
 import { getCurrentUser } from "@/app/actions/authActions";
 import EditButton from "./EditButton";
 import DeleteButton from "../DeleteButton";
-import BidItem from "./BidItem";
 import BidList from "./BidList";
 
 export default async function Details({ params }: { params: { id: string } }) {
