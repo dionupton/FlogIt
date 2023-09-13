@@ -18,7 +18,10 @@
                     <div class="card-body">
                         <form asp-page="/Account/Login/Index">
                             <input type="hidden" asp-for="Input.ReturnUrl" />
-
+                            <div> <h6>Demo Account Details :</h6></div>
+                            <div>Login : demo</div>
+                            <div>Password : Demo123$ </div>
+                            <br>
                             <div class="form-group">
                                 <label asp-for="Input.Username"></label>
                                 <input class="form-control" placeholder="Username" asp-for="Input.Username" autofocus>
