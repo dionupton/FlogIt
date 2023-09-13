@@ -29,7 +29,7 @@ Welcome to **FlogIt**, my demo auction platform project. Written with modern dev
 </p>
 
 
-- **Frontend**: Utilized Next.js, capitalizing on its capabilities to create a dynamic and responsive user interface.
+- **Frontend**: Utilised Next.js, capitalizing on its capabilities to create a dynamic and responsive user interface.
 - **Backend**: Developed on the ASP.NET Core microservices framework. Duende IdentityServer is integrated for authentication, SignalR for real-time interactions, and RabbitMQ for asynchronous messaging.
 - **Databases**: PostgreSQL for its robustness in handling relational data and MongoDB for its flexibility with NoSQL storage.
 - **Infrastructure**: Orchestrated the entire setup using Kubernetes, ensuring seamless container management and deployment.
