@@ -2,6 +2,8 @@
 
 Welcome to **FlogIt**, my demo auction platform project. Written with modern development practices, this README provides a overview of the technologies, methodologies, and architectural choices behind this project.
 
+❗❗ This is a demo project focused on showcasing .NET implementation and the front end has not been fully polished, so there may be bugs or missing functionality on the website ❗❗
+
 ## ✨ Core Functionalities
 
 - **Real-time Bidding**: Seamlessly participate in live auctions, placing and updating bids in real-time.
