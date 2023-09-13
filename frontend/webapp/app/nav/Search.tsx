@@ -4,6 +4,8 @@ import { useParamStore } from '@/hooks/useParamsStore'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import {FaSearch} from 'react-icons/fa'
+import {isMobile} from 'react-device-detect';
+
 
 export default function Search() {
   const router = useRouter();
@@ -21,6 +23,9 @@ export default function Search() {
     setParams({searchTerm: searchValue})
   }
 
+  if(isMobile) return (
+    <div></div>
+  )
   return (
     <div className='flex w-[50%] items-center border-2 rounded py-2 shadow-sm'>
         <input 
