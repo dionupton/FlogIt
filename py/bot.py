@@ -8,12 +8,10 @@ import pandas as pd
 import schedule
 import pytz
 from flask import Flask, jsonify
-from flask_cors import CORS
 from threading import Thread
 
 
 app = Flask("pythonBot")
-CORS(app)
 
 logs = []
 
@@ -138,7 +136,7 @@ def create_auction():
     
     if response.status_code == 200:
         print('successfuly created new auction')
-        add_log(f"py-svc > Successfully created auction with ID: {response.json()['id']}")
+        add_log(f"Successfully created auction with ID: {response.json()['id']}")
 
     if response.status_code == 403 | 401:  # Forbidden, meaning the token might have expired or is not valid
         print("Access denied. Re-obtaining token...")
@@ -190,7 +188,7 @@ def place_bid():
     # Print the response
     if response.status_code == 200:
         print(f"Successfully placed a bid of £{bid_amount} for auction {auction['id']}")
-        add_log(f"py-svc > Successfully placed a bid of £{bid_amount} for auction {auction['id']}")
+        add_log(f"Successfully placed a bid of £{bid_amount} for auction {auction['id']}")
 
     else:
         print(f"Failed to place bid. Status code: {response.status_code}. Response: {response.text}")
@@ -214,7 +212,7 @@ if __name__ == "__main__":
     t = Thread(target=run_schedule)
     t.start()
     
-    app.run( host='0.0.0.0', port=5000)
+    app.run(port=5000)
 
     
 

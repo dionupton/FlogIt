@@ -8,9 +8,9 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 # Copy the requirements.txt into the container
-COPY requirements.txt requirements.txt
+COPY py/requirements.txt requirements.txt
 # Copy the specific file resources/image_urls.txt into the container.
-COPY resources/image_urls.txt resources/image_urls.txt
+COPY py/resources/image_urls.txt resources/image_urls.txt
 
 ARG UID=10001
 RUN adduser \
