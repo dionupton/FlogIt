@@ -37,7 +37,7 @@ Welcome to **FlogIt**, my illustrative auction platform project. Crafted with pr
 
 ## 🌍 Deployment Overview
 
-- **Live Application**: Experience the platform firsthand at [FlogIt Demo App](https://app.flogitdemoapp.uk).
+- **Live Application**: Experience the platform firsthand at [FlogIt Demo App](https://app.flogitdemoapp.co.uk).
 - **Identity Server**: Isolated hosting to optimize authentication processes.
 - **Microservices**: Hosted on cloud-based Kubernetes clusters, emphasizing scalability and resilience.
 
