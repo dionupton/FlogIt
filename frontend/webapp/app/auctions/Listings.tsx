@@ -11,6 +11,8 @@ import { shallow } from "zustand/shallow";
 import qs from "query-string";
 import EmptyFilter from "../components/EmptyFilter";
 import { useAuctionStore } from "@/hooks/useAuctionStore";
+import {isMobile} from 'react-device-detect';
+
 
 export default function Listings() {
   const [loading, setLoading] = useState(true);
@@ -52,6 +54,8 @@ export default function Listings() {
   }, [url, setData]);
 
   if (loading) return <h3>Loading ...</h3>;
+
+  if(isMobile) return <h3> This website is not supported for mobile devices. Please use a desktop to preview this demo </h3>
 
   return (
     <>
