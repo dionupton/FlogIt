@@ -96,3 +96,15 @@ Each microservice in FlogIt is optimized for deployment within a Kubernetes envi
 ## 🔄 GitHub CI/CD Integration
 
 The project integrates a CI/CD pipeline, ensuring automated testing, building, and deployment. This approach guarantees code quality and streamlined deployments, reflecting industry best practices.
+
+## 🐍 Python Bot Functionalities
+
+The `bot.py` script in the repository simulates various auction-related activities. This service, like the Identity Service, runs completely seperate from the main services.
+
+- **Logging**: Maintains a log of the bot's activities, which can be accessed via the `/logs` endpoint.
+- **Token Management**: Obtains access tokens for users `bob` and `alice` to authenticate their requests.
+- **Auction Creation**: Periodically generates new auctions with randomized attributes.
+- **Bid Placement**: Places bids on ongoing auctions, ensuring it doesn't bid on its own auctions.
+- **Scheduling**: Uses scheduled tasks to periodically fetch auction data, create new auctions, and place bids.
+- **Flask Application**: Operates a Flask app to serve the `/logs` endpoint and oversee the bot's activities.
+
