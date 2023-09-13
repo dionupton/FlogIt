@@ -55,7 +55,7 @@ export default function Listings() {
 
   if (loading) return <h3>Loading ...</h3>;
 
-  if(isMobile) return <h3> This website is not supported for mobile devices. Please use a desktop to preview this demo </h3>
+  if(isMobile) return <h3> This website is not supported for mobile devices. Please use a desktop to preview this demo. You will be able to still see activity notifications. </h3>
 
   return (
     <>
