@@ -1,17 +1,16 @@
 # 💰 FlogIt: Demonstrative Auction Platform
 
-Welcome to **FlogIt**, my illustrative auction platform project. Crafted with precision and modern development practices, this README provides a comprehensive overview of the technologies, methodologies, and architectural choices that underpin this demo project.
+Welcome to **FlogIt**, my demo auction platform project. Written with modern development practices, this README provides a overview of the technologies, methodologies, and architectural choices behind this project.
 
 ## ✨ Core Functionalities
 
 - **Real-time Bidding**: Seamlessly participate in live auctions, placing and updating bids in real-time.
-- **User Authentication**: A robust mechanism ensuring secure user registration and login.
+- **User Authentication**: A bare-bones implementation of Duende Identity Service allowing secure registration and login functionality for users
 - **Notifications**: Real-time alerts on bid activities and auction progress.
-- **Search**: Efficiently locate auctions and specific items.
 
 ## 🛠️ Technical Stack & Architecture
 <p align="center">
-  Explore the technologies and services that power this portfolio:
+  Explore the technologies and services that power this project:
 </p>
 
 <p align="center">
@@ -32,14 +31,14 @@ Welcome to **FlogIt**, my illustrative auction platform project. Crafted with pr
 
 - **Frontend**: Utilized Next.js, capitalizing on its capabilities to create a dynamic and responsive user interface.
 - **Backend**: Developed on the ASP.NET Core microservices framework. Duende IdentityServer is integrated for authentication, SignalR for real-time interactions, and RabbitMQ for asynchronous messaging.
-- **Databases**: Chose PostgreSQL for its robustness in handling relational data and MongoDB for its flexibility with NoSQL storage.
+- **Databases**: PostgreSQL for its robustness in handling relational data and MongoDB for its flexibility with NoSQL storage.
 - **Infrastructure**: Orchestrated the entire setup using Kubernetes, ensuring seamless container management and deployment.
 
 ## 🌍 Deployment Overview
 
 - **Live Application**: Experience the platform firsthand at [FlogIt Demo App](https://app.flogitdemoapp.co.uk).
 - **Identity Server**: Isolated hosting to optimize authentication processes.
-- **Microservices**: Hosted on cloud-based Kubernetes clusters, emphasizing scalability and resilience.
+- **Microservices**: Hosted on cloud-based Kubernetes clusters, emphasising scalability and resilience.
 
 ## 🌐 Frontend Services
 
@@ -57,7 +56,7 @@ Constructed with the [Next.js](https://nextjs.org/) framework, the web applicati
 ### Bidding Service
 
 - **Framework**: ASP.NET Core
-- **Functionality**: Handles bid lifecycle, liaising with the Auction Service using gRPC. RabbitMQ assists in delivering instantaneous bid notifications.
+- **Functionality**: Handles bid lifecycle, communicating with the Auction Service via gRPC. RabbitMQ assists in delivering instantaneous bid notifications.
 
 ### Gateway Service
 
@@ -83,11 +82,11 @@ Constructed with the [Next.js](https://nextjs.org/) framework, the web applicati
 
 Each microservice in FlogIt is optimized for deployment within a Kubernetes environment:
 
-- **Auction Service**: Encapsulated within the `dionupton/auction-svc` container and integrated with RabbitMQ.
-- **Bidding Service**: Housed in the `dionupton/bid-svc` container, it establishes connections with RabbitMQ and the Auction Service.
-- **Gateway Service**: Operates from the `dionupton/gateway-svc` container.
-- **Notification Service**: Positioned in the `dionupton/notify-svc` container.
-- **Search Service**: Located in the `dionupton/search-svc` container.
+- **Auction Service**: (`dionupton/auction-svc` container).
+- **Bidding Service**: (`dionupton/bid-svc` container).
+- **Gateway Service**: (`dionupton/gateway-svc` container).
+- **Notification Service**: (`dionupton/notify-svc` container).
+- **Search Service**:(`dionupton/search-svc` container).
 
 ## 🗄️ Database Infrastructure
 
