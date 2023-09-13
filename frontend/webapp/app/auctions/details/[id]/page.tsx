@@ -1,4 +1,8 @@
-import { getBidsForAuction, getDetailedViewData } from "@/app/actions/auctionActions";
+
+import {
+  getBidsForAuction,
+  getDetailedViewData,
+} from "@/app/actions/auctionActions";
 import Heading from "@/app/components/Heading";
 import React from "react";
 import CountdownTimer from "../../CountdownTimer";

@@ -2,11 +2,17 @@
 
 import {Auction} from "@/types";
 import {Table} from "flowbite-react";
+import { useRouter } from "next/navigation";
 
 type Props = {
     auction: Auction
 }
 export default function DetailedSpecs({auction}: Props) {
+    const router = useRouter();
+    if(auction === undefined || auction == null || auction['id'] == null) {
+        router.push('/');
+    }
+    
     return (
         <Table striped={true}>
             <Table.Body className="divide-y">
